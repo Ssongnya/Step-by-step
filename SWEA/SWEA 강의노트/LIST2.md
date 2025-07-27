@@ -396,7 +396,7 @@ def binarySearch2(a, low, high, key) :
 def select(lst, k) :
     for i in range(0, k) :
         minindex = i
-        for j in range(i + 1, len(list)) :
+        for j in range(i + 1, len(lst)) :
             if lst[minindex] > lst[j] :
                 minindex = j
         lst[i], lst[minindex] = lst[minindex], lst[i]
