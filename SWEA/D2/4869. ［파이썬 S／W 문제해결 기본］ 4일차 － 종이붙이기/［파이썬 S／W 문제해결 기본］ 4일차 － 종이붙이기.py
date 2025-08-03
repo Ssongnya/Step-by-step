@@ -1,12 +1,11 @@
-# 재귀함수
+# DP 사용
 def paper_connect(N) :
     paper = [1, 3]
-    if (N/10) > 2 :
-        return 2*paper_connect(N-20) + paper_connect(N-10)
-    elif N/10 == 2 :
-        return paper[1]
-    else :
-        return paper[0]
+    for i in range(2, N//10):
+        num = paper[i-1] + paper[i-2] * 2
+        paper.append(num)
+    n = len(paper) - 1
+    return paper[n]
 
 
 T = int(input())
