@@ -1,19 +1,22 @@
 T = int(input())
 
-for k in range(1, T + 1) :
+for t in range(1, T+1):
     N, M = map(int, input().split())
-    a_i = list(map(int, input().split()))
+    ai = list(map(int, input().split()))
+    sum_lst = []
+    for i in range(N - M + 1):
+        hap = 0
+        for k in range(i, i+M):
+            hap += ai[k]
+        sum_lst.append(hap)
 
-    if len(a_i) != N :
-        exit()
+    max_sum = sum_lst[0]
+    min_sum = sum_lst[0]
 
-    hap = []
+    for num in sum_lst :
+        if num > max_sum:
+            max_sum = num
+        if num < min_sum:
+            min_sum = num
 
-    for i in range(N-M+1) : 
-        hap_3 = sum(a_i[i:i+M])
-        hap.append(hap_3)
-
-    hap_max = max(hap)
-    hap_min = min(hap)
-
-    print(f'#{k} {hap_max - hap_min}')
+    print(f'#{t} {max_sum - min_sum}')
