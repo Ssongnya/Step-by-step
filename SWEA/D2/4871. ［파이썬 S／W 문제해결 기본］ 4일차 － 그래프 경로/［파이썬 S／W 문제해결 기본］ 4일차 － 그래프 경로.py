@@ -32,6 +32,7 @@ for t in range(1, T+1) :
     for e in direct :
         a, b = e
         graph[a].append(b)
+        # graph[b].append(a) -> 간선이기 때문에 한 방향으로만 진행해야함!
     
     
 
