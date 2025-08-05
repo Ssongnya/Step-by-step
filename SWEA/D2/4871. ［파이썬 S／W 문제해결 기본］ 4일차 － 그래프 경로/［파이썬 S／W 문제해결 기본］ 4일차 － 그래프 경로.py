@@ -1,6 +1,6 @@
 
 def find_direct(graph, start):
-    visited = []
+    visited = []    
     stack = [start]
 
     while stack:
@@ -19,8 +19,8 @@ for t in range(1, T + 1):
     V, E = map(int, input().split())
     direct = {x: [] for x in range(1, V+1)}
     for _ in range(E):
-        d, e = map(int, input().split())
-        direct[d].append(e)
+        s, e = map(int, input().split())
+        direct[s].append(e)
 
     S, G = map(int, input().split())
 
