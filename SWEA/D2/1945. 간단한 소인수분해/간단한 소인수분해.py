@@ -10,5 +10,5 @@ for t in range(1, T + 1):
             N /= prime
             count[idx] += 1
 
-    print(f"#{t} {' '.join(map(str, count))}")
+    print(f"#{t}", *count)
 
