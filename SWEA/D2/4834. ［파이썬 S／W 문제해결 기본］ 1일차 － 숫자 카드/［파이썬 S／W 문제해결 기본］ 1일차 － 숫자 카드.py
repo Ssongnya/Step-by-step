@@ -10,18 +10,15 @@ for t in range(1, T+1):
         else :
             nums_dict[i] = 1
 
-    key_lst = list(nums_dict.keys())
-    value_lst = list(nums_dict.values())
+    max_key = None
+    max_value = -1
 
-    max_idx = 0
-    max_value = value_lst[0]
+    for j in nums_dict:
+        if nums_dict[j] > max_value:
+            max_value = nums_dict[j]
+            max_key = j
+        elif nums_dict[j] == max_value:
+            if int(j) > int(max_key):
+                max_key = j
 
-    for j in range(len(value_lst)):
-        if value_lst[j] > max_value:
-            max_value = value_lst[j]
-            max_idx = j
-        elif value_lst[j] == max_value :
-            if int(key_lst[j]) > int(key_lst[max_idx]):
-                max_idx = j
-
-    print(f"#{t} {int(key_lst[max_idx])} {max_value}")
+    print(f"#{t} {max_key} {max_value}")
