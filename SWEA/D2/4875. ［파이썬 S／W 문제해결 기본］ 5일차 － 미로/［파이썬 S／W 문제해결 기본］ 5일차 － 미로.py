@@ -1,5 +1,3 @@
-from collections import deque
-
 T = int(input())
 
 for t in range(1, T + 1):
@@ -15,14 +13,14 @@ for t in range(1, T + 1):
                 end_pos = (i, j)
 
     visited = [[0] * N for _ in range(N)]
-    queue = deque([start_pos])
+    stack = [start_pos]
     visited[start_pos[0]][start_pos[1]] = 1
     found = False
 
-    while queue:
-        x, y = queue.popleft()
+    while stack:
+        x, y = stack.pop()
 
-        if (x, y) == end_pos:  # 도착점 발견
+        if (x, y) == end_pos:
             found = True
             break
 
@@ -30,6 +28,6 @@ for t in range(1, T + 1):
             nx, ny = x + dx, y + dy
             if 0 <= nx < N and 0 <= ny < N and maze[nx][ny] != 1 and not visited[nx][ny]:
                 visited[nx][ny] = 1
-                queue.append((nx, ny))
+                stack.append((nx, ny))
 
     print(f"#{t} {1 if found else 0}")
