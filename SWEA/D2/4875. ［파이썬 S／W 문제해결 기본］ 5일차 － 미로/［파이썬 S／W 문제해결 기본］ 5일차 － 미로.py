@@ -1,33 +1,57 @@
+def start(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(n):
+            if arr[i][j] == 2 :
+                start = (i, j)
+    return start
+
+
+def end(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(n):
+            if arr[i][j] == 3 :
+                end = (i, j)
+    return end
+
+def find_0 (x, y):
+
+    if (x, y) == end_place:
+        return True
+    
+    else :
+        
+        visited[x][y] = True
+        for i, j in near:
+            nx = x + i
+            ny = y + j
+
+            if 0 <= nx < N and 0 <= ny < N and maze[nx][ny] != 1 and not visited[nx][ny]:
+                if find_0(nx, ny):
+                    return True
+            
+        visited[x][y] = False
+        return False
+
 T = int(input())
 
 for t in range(1, T + 1):
+
     N = int(input())
-    maze = [[int(x) for x in input().strip()] for _ in range(N)]
 
-    start_pos = end_pos = None
-    for i in range(N):
-        for j in range(N):
-            if maze[i][j] == 2:
-                start_pos = (i, j)
-            elif maze[i][j] == 3:
-                end_pos = (i, j)
+    maze = [list(map(int, input().strip())) for _ in range(N)]
 
-    visited = [[0] * N for _ in range(N)]
-    stack = [start_pos]
-    visited[start_pos[0]][start_pos[1]] = 1
-    found = False
+    visited = [[False]*N for _ in range(N)]
 
-    while stack:
-        x, y = stack.pop()
+    near = [(1, 0), (-1, 0), (0, -1), (0, 1)]
 
-        if (x, y) == end_pos:
-            found = True
-            break
 
-        for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-            nx, ny = x + dx, y + dy
-            if 0 <= nx < N and 0 <= ny < N and maze[nx][ny] != 1 and not visited[nx][ny]:
-                visited[nx][ny] = 1
-                stack.append((nx, ny))
+    start_place = start(maze)
+    end_place = end(maze)
 
-    print(f"#{t} {1 if found else 0}")
+                
+    if find_0(*start_place) :
+        print(f"#{t} 1")
+    else :
+        print(f"#{t} 0")
