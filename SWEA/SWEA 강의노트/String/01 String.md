@@ -90,21 +90,13 @@ void user_strcpy(char*des, char*src)
 2. Jave에서는 equals() 메서드를 제공
     - 문자열 비교에서 == 연산은 메모리 참조가 같은지를 묻는 것
 3. 파이썬에서는 연산자와 is 연산자를 제공
-    - == 연산자는 내부적으로 특수메서드 __eq__()를 호출
 
-(C언어 예시)
-``` C
-int my_strmp(const char*str1, const char*str2)
-{
-    int i=0, j=0;
-    while(str1[i] != '\0')
-    {
-        if(str[i++]!=str2[j++])
-            break;
-    }
-    return (str1[i]-str2[j]);
-}
-```
+#### `==`연산자와 `is`연산자
+
+- `==`는 값(value)이 같은지를 비교한다.
+- `is`는 객체의 정체성(identity), 즉 **같은 객체(메모리 주소)**인지 비교한다.
+- `==` 연산자는 내부적으로 특수 메서드 __eq__()를 호출
+
 
 ## 문자열 숫자를 점수로 변환하기
 
