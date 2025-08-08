@@ -6,6 +6,10 @@ for t in range(1, T + 1):
     txt = input()
 
     reverse = [pair[x] for x in txt]
-    result = ("".join(reverse))[::-1]
+    result = []
+
+    for i in range(len(reverse)-1, -1, -1):
+        result.append(reverse[i])
     
+    result = "".join(result)
     print(f"#{t} {result}")
