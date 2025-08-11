@@ -1,28 +1,40 @@
-#고지식하게 풀어보기
-
 T = int(input())
 
 
-def brute_force(txt, pattern):
-    x, y = len(txt), len(pattern)
-
-    for i in range(x - y + 1):
-        match = True
-        for j in range(y):
-            if txt[i + j] != pattern[j]:
-                match = False
-                break
-        if match:
-            return 1
-
-    return 0
-
-
 for t in range(1, T + 1):
-
     str1 = input()
     str2 = input()
 
-    result = brute_force(str2, str1)
+    m = len(str1)
+    n = len(str2)
 
-    print(f"#{t} {result}")
+    if m == 0:
+        print(f"#{t} 1")
+        continue
+
+    lps = [0] * m
+
+    j = 0
+    for i in range(1, m):
+        while j>0 and str1[i] != str1[j] :
+            j = lps[j - 1]
+        if str1[i] == str1[j]:
+            j += 1
+            lps[i] = j
+
+    j = 0
+    found = 0
+    
+    for i in range(n):
+        while j > 0 and str2[i] != str1[j]:
+            j = lps[j - 1]
+        
+        if str2[i] == str1[j]:
+            j += 1
+            if j == m:
+                found = 1
+                break
+
+    print(f"#{t} {found}") 
+
+    
