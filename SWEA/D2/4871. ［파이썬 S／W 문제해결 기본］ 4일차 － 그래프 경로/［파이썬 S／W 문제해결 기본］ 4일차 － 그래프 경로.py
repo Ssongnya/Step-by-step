@@ -1,30 +1,32 @@
-
-def find_direct(graph, start):
-    visited = []    
-    stack = [start]
-
-    while stack:
-        node = stack.pop()
-        if node not in visited:
-            visited.append(node)
-            for near in graph[node]:
-                if near not in visited:
-                    stack.append(near)
-    return visited
-
-
 T = int(input())
 
 for t in range(1, T + 1):
     V, E = map(int, input().split())
-    direct = {x: [] for x in range(1, V+1)}
+
+    direct = [[] for _ in range(V + 1)]
     for _ in range(E):
-        s, e = map(int, input().split())
-        direct[s].append(e)
+        a, b = map(int, input().split())
+        direct[a].append(b)
 
     S, G = map(int, input().split())
 
-    if G in find_direct(direct, S):
-        print(f"#{t} 1")
-    else:
-        print(f"#{t} 0")
+    stack = [S]
+    visited = [False] * (V + 1)
+    visited[S] = False
+    found = False
+
+    while len(stack) > 0:
+        now = stack.pop()
+
+        if now == G:
+            found = True
+            break
+
+        for i in direct[now]:
+            if not visited[i]:
+                stack.append(i)
+                visited[i] = True
+
+    result = 1 if found else 0
+
+    print(f"#{t} {result}")
