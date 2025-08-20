@@ -1,17 +1,21 @@
+from collections import deque
 T = int(input())
 
 for t in range(1, T + 1):
-    day = int(input())
-    price = list(map(int, input().split()))
+    N = int(input())
 
-    stack = []
+    product = list(map(int, input().split()))
+
+    r_pro = deque(reversed(product))
+
+    a = r_pro.popleft()
     earn = 0
 
-    for i in range(day-1, -1, -1):
-        if not stack or price[i] > stack[-1]:
-            stack.append(price[i])
-
+    for i in range(len(r_pro)):
+        b = r_pro.popleft()
+        if a > b:
+            earn += a - b
         else:
-            earn += stack[-1] - price[i]
+            a = b
 
     print(f"#{t} {earn}")
