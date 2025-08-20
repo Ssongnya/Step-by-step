@@ -120,9 +120,114 @@ ex) 노드가 10개인 완전 이진 트리
     - **L → R → V**
     - 루트노드보다 자손을 먼저 방문
 
-#### 전위 순회
+### 전위 순회
 
-- 수행 바이법
+- 수행 방법
   - 1) 현재 노드 n을 방문하여 처리 : V
   - 2) 현재 노드 n의 왼쪽 서브트리로 이동 : L
   - 3) 현재 노드 n의 오른쪽 서브트리로 이동 : R
+  ```python
+  def preorder_traverse(T):   # 전위순회
+    if T:
+      visit(T)
+      preorder_traverse(T.left)
+      preorder_traverse(T.right)
+  ```
+
+#### 전위 순회 트리
+```
+         A
+     /      \
+    B        C
+  /   \    /   \
+  D    E   F    G
+     /   \
+    H     I
+```
+> T0 : A가 root인 트리   
+> T1 : B가 root인 트리   
+> T2 : C가 root인 트리   
+> T3 : E가 root인 트리
+
+순서_1 : T0 → T1 → T2   
+순서_2 : A → B, D(T3) → C, F, G   
+<u>총 순서 : A → B → D → E → H → I → C → F → G</u>
+
+### 중위 순회
+
+- 수행 방법
+  - 1) 현재 노드 n의 왼쪽 서브트리로 이동 : L
+  - 2) 현재 노드 n을 방문하여 처리 : V
+  - 3) 현재 노드 n의 오른쪽 서브트리로 이동 : R
+  ```python
+  def inorder_traverse(T): # 중위순회
+    if T:
+      inorder_traverse(T.left)
+      visit(T)
+      inorder_traverse(T.right)
+  ```
+
+#### 중위 순회 트리
+```
+         A
+     /      \
+    B        C
+  /   \    /   \
+  D    E   F    G
+     /   \
+    H     I
+```
+> T0 : A가 root인 트리   
+> T1 : B가 root인 트리   
+> T2 : C가 root인 트리   
+> T3 : E가 root인 트리
+
+순서_1 : T1 → T0 → T2   
+**순서_2 : D, B(T3) → A → F, C, G**   
+<u>총 순서 : D → B → H → E → I → A → F → C → G</u>
+
+### 후위 순회
+
+- 수행 방법
+  - 1) 현재 노드 n의 왼쪽 서브트리로 이동 : L
+  - 2) 현재 노드 n의 오른쪽 서브트리로 이동 : R
+  - 3) 현재 노드 n을 방문하여 처리 : V
+  ```python
+  def postorder_traverse(T): # 중위순회
+    if T:
+      postorder_traverse(T.left)
+      postorder_traverse(T.right)
+      visit(T)
+  ```
+
+#### 후위 순회 트리
+```
+         A
+     /      \
+    B        C
+  /   \    /   \
+  D    E   F    G
+     /   \
+    H     I
+```
+> T0 : A가 root인 트리   
+> T1 : B가 root인 트리   
+> T2 : C가 root인 트리   
+> T3 : E가 root인 트리
+
+순서_1 : T1 → T2 → T0   
+**순서_2 : D(T3), B → F, G, C → A**   
+<u>총 순서 : D → H → I → E → B → F → G → C → A</u>
+
+
+### 이진 트리 순회방법 비교
+
+1. 프리오더 전위 순회
+2. 인오더 중위 순회
+3. 포스트오더 후위 순회
+
+| 순회 방식 | 방문 순서         | 예시 결과       |
+| ----- | ------------- | ----------- |
+| 프리오더  | 루트 → 왼쪽 → 오른쪽 | A B D E C F |
+| 인오더   | 왼쪽 → 루트 → 오른쪽 | D B E A C F |
+| 포스트오더 | 왼쪽 → 오른쪽 → 루트 | D E B F C A |
