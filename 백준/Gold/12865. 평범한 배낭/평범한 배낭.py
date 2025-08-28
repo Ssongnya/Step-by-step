@@ -9,4 +9,4 @@ for w, v in product:
         # weight[K-i] 
         weight[i] = max(weight[i - w] + v, weight[i])
 
-print(weight[K])
+print(weight.pop())
