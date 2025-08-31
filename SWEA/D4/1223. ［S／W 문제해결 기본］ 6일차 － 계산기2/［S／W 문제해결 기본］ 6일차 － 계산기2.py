@@ -1,42 +1,44 @@
-def postfix(my_str):
-    priority = {'+': 1, '*': 2}
-    stack = []
-
-    fix = ""
-
-    for s in my_str:
-        if s.isdigit():
-            fix += s
-        else:
-            while stack and priority[stack[-1]] >= priority[s]:
-                fix += stack.pop()
-            stack.append(s)
-    
-    while stack:
-        fix += stack.pop()
-
-    return fix
-
-
-
 for t in range(1, 11):
     N = int(input())
     fx = input()
 
-    fixed = postfix(fx)
-
     stack = []
+    oper = {'+' : 1, '*' : 2}
 
-    for i in fixed:
-        if i.isdigit():
-            stack.append(int(i))
+    result = ''
 
+    for i in fx:
+        if i.isnumeric():
+            result += i
+            continue
+        elif not stack:
+            stack.append(i)
+            continue
+        while stack and oper[i] <= oper[stack[-1]]:
+            result += stack.pop()
+        stack.append(i)
+    
+    while stack:
+        result += stack.pop()
+    
+
+    result_stack = []
+
+    for j in result:
+        if j.isnumeric():
+            result_stack.append(j)
+        
         else:
-            b = stack.pop()
-            a = stack.pop()
+            a = int(result_stack.pop())
+            b = int(result_stack.pop())
 
-            if i == "+":
-                stack.append(a + b)
+            if j == "+":
+                result_stack.append(a + b)
             else:
-                stack.append(a*b)
-    print(f"#{t} {stack[0]}")
+                result_stack.append(a * b)
+
+
+
+    print(f"#{t} {result_stack[0]}")
+                
+        
