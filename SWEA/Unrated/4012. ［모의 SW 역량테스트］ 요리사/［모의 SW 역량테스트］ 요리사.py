@@ -1,39 +1,43 @@
 def synergy(lst):
     total = 0
 
-    for i in range(len(lst)):
-        for j in range(i + 1, len(lst)):
-            a, b = lst[i], lst[j]
-            total += ingredient[a][b] + ingredient[b][a]
-
+    for x in range(len(lst)):
+        for y in range(x + 1, len(lst)):
+            i = lst[x]
+            j = lst[y]
+            total += ingredient[i][j] + ingredient[j][i]
+    
     return total
 
 
-def find_case(idx, choosed):
+def subset(idx, cnt, chosen):
     global min_diff
 
-    if len(choosed) == N // 2:
-        other = [i for i in range(N) if i not in choosed]
-        s1 = synergy(choosed)
-        s2 = synergy(other)
-        min_diff = min(min_diff, abs(s1-s2))
+    if cnt > N // 2 :
         return
     
     if idx >= N:
+        if cnt == (N // 2) and len(chosen) == N//2:
+            other = [i for i in range(N) if i not in chosen]
+            s1 = synergy(chosen)
+            s2 = synergy(other)
+            diff = abs(s1 - s2)
+            min_diff = min(diff, min_diff)
         return
-    
-    find_case(idx + 1, choosed + [idx])
-    find_case(idx + 1, choosed)
+
+    subset(idx + 1, cnt + 1, chosen + [idx])
+    subset(idx + 1, cnt, chosen)
 
 
 T = int(input())
 
 for t in range(1, T + 1):
     N = int(input())
-
+    
     ingredient = [list(map(int, input().split())) for _ in range(N)]
-    min_diff = 1000000000
 
-    find_case(0, [])
+    min_diff = float('inf')
+
+    subset(0, 0, [])
 
     print(f"#{t} {min_diff}")
