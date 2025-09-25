@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 import heapq
 
 V, E = map(int, input().split())
