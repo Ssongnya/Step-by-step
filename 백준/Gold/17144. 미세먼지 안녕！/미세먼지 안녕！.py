@@ -1,21 +1,15 @@
+
 R, C, T = map(int, input().split())
 
 cleaner = []
-dust = []
 
 dust_map = [list(map(int, input().split())) for _ in range(R)]
 
 delta = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
 for i in range(R):
-
     if dust_map[i][0] == -1:
         cleaner.append((i, 0))
-        
-    for j in range(C):
-
-        if dust_map[i][j] > 0:
-            dust.append((i, j))
 
 
 def spread():
