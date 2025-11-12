@@ -16,13 +16,9 @@ for _ in range(T):
 
     a, b = map(int, input().split())
 
-    if a > b:
-        big = a
-        small = b
-    else:
-        big = b
-        small = a
-    
+    big = a if a > b else b
+    small = b if a > b else a
+
     answer = (fact(big) // fact(big - small)) // fact(small)
 
     print(answer)
