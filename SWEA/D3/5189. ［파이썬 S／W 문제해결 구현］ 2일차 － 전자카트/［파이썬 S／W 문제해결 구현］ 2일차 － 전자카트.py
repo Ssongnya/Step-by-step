@@ -1,30 +1,29 @@
+def find_min_sum(idx, hap):
+    global min_hap
 
-def energy(now, n, curr_energy, visited): 
-    global min_total
+    if hap >= min_hap:
+        return
 
-    if curr_energy >= min_total:
+    if len(visited) == N:
+        total = hap + arr[idx][0]
+        min_hap = min(min_hap, total)
         return
     
-    if len(visited) == n:
-        total = curr_energy + e[now][0]
-        min_total = min(min_total, total)
-        return
-    
-    for i in range(1, n):
+    for i in range(1, N):
         if i not in visited:
             visited.add(i)
-            energy(i, n, curr_energy + e[now][i], visited)
+            find_min_sum(i, hap + arr[idx][i])
             visited.remove(i)
 
 
 T = int(input())
-
 for t in range(1, T + 1):
     N = int(input())
-    e = [list(map(int, input().split())) for _ in range(N)]
+    arr = [list(map(int, input().split())) for _ in range(N)]
 
     visited = set([0])
-    min_total = 10000000000
+    min_hap = float('inf')
 
-    energy(0, N, 0, visited)
-    print(f"#{t} {min_total}")   
+    find_min_sum(0, 0)
+    print(f"#{t} {min_hap}")
+
