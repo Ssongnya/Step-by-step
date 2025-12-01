@@ -1,45 +1,43 @@
-def my_run(lst):
-    if len(lst) < 3:
-        return False 
-    
-    sorted_lst = sorted(set(lst))
-    
-    for i in range(len(sorted_lst)-2):
-        if sorted_lst[i] + 1 == sorted_lst[i + 1] and sorted_lst[i + 1] + 1 == sorted_lst[i + 2]:
-            return True
-    
-    return False
-
-def triplet(lst, n):
-    if len(lst) < 3:
-        return False
-    
-    if lst.count(n) >= 3:
-        return True
-    
-    return False
-
 T = int(input())
 
+def my_run(arr):
+    if len(arr) < 3:
+        return False
+    for i in range(8):
+        if arr[i] and arr[i+1] and arr[i+2]:
+            return True
+    return False
+
+def triplet(arr):
+    if len(arr) < 3:
+        return False
+    for i in range(10):
+        if arr[i] >= 3:
+            return True
+    return False
+
 for t in range(1, T + 1):
-    nums_lst = list(map(int, input().split()))
-
-    per1 = []
-    per2 = []
-
-    winner = 0
-
-    for i in range(12):
-        j = i // 2
-        if i % 2 == 0:
-            per1.append(nums_lst[i])
-            if my_run(per1) or triplet(per1, nums_lst[i]):
-                winner = 1
-                break
-        else:
-            per2.append(nums_lst[i])
-            if my_run(per2) or triplet(per2, nums_lst[i]):
-                winner = 2
-                break
     
-    print(f"#{t} {winner}")
+    whole = list(map(int, input().split()))
+    p1 = [0] * 10
+    p2 = [0] * 10
+    find = False
+    for i in range(12):
+        if i % 2 == 0:
+            n = whole[i]
+            p1[n] += 1
+        else:
+            n = whole[i]
+            p2[n] += 1
+
+        if my_run(p1) or triplet(p1):
+            print(f"#{t} {1}")
+            find = True
+            break
+
+        elif my_run(p2) or triplet(p2):
+            print(f"#{t} {2}")
+            find = True
+            break
+    if not find:
+        print(f"#{t} {0}")
